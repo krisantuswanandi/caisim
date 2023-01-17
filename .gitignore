@@ -4,6 +4,7 @@ node_modules
 
 
 # local env files
+.env
 .env.local
 .env.*.local
 
@@ -23,3 +24,8 @@ pnpm-debug.log*
 *.sw?
 
 .vercel
+
+.nuxt
+.nitro
+.cache
+.output
