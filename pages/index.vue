@@ -1,28 +1,31 @@
 <script setup lang="ts">
-import { useGroceriesStore } from '@/stores/groceries'
+const { data } = useFetch("/api/products");
 
-const search = ref('')
+const search = ref("");
 
-const groceriesStore = useGroceriesStore()
-const groceries = groceriesStore.groceries
+const searchProduct = (keyword: string) => {
+  search.value = keyword;
+};
 
-const searchGroceries = (keyword: string) => {
-  search.value = keyword
-}
+const products = computed(() => {
+  if (!data.value) return [];
 
-const filteredGroceries = computed(() => {
-  if (!search.value.trim())
-    return groceries
+  if (!search.value.trim()) return data.value;
 
-  return groceries.filter(groceriesItem => groceriesItem.name.toLowerCase().includes(search.value.toLowerCase()))
-})
+  return data.value.filter((item) =>
+    item.name.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 </script>
 
 <template>
-  <SearchGroceries @search="searchGroceries" />
-  <GroceriesList :data="filteredGroceries" />
+  <SearchProduct @search="searchProduct" />
+  <ProductList :data="products" />
   <div class="fixed left-0 right-0 bottom-0 max-w-lg p-2 mx-auto">
-    <NuxtLink to="/add" class="bg-gray-400 hover:bg-gray-500 py-3 px-4 block rounded-lg text-center">
+    <NuxtLink
+      to="/add"
+      class="bg-gray-400 hover:bg-gray-500 py-3 px-4 block rounded-lg text-center"
+    >
       New Item
     </NuxtLink>
   </div>

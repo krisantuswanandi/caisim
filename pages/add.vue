@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import { useGroceriesStore } from '@/stores/groceries'
-
-const router = useRouter()
-const groceries = useGroceriesStore()
+const router = useRouter();
 
 const goBack = () => {
-  router.push('/')
-}
+  router.push("/");
+};
 
-const addGroceries = (groceriesItem: GroceriesItem) => {
-  groceries.addGroceries(groceriesItem)
-  goBack()
-}
+const addProduct = () => {
+  goBack();
+};
 </script>
 
 <template>
-  <AddGroceries @submit="addGroceries" @cancel="goBack" />
+  <AddProduct @submit="addProduct" @cancel="goBack" />
 </template>
