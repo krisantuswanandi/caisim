@@ -1,7 +1,10 @@
 <script setup lang="ts">
 const router = useRouter();
 
-const login = () => {
+const login = async () => {
+  await useFetch("/api/login", {
+    method: "POST",
+  })
   router.push("/");
 };
 </script>
