@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { db, schema } from "@/database";
 import { Product } from "@/database/schema";
 
-export default defineEventHandler(async (event) => {
+export default defineAuthenticatedEventHandler(async (event) => {
   const id = getRouterParam(event, "id") || "";
 
   try {

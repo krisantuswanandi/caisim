@@ -3,7 +3,7 @@ import { db, schema } from "@/database";
 
 type NewProduct = typeof schema.product.$inferInsert;
 
-export default defineEventHandler(async (event) => {
+export default defineAuthenticatedEventHandler(async (event) => {
   const body = await readBody(event);
   const id = nanoid();
 
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   };
 
   try {
-    // await db.insert(schema.product).values(newProduct);
+    await db.insert(schema.product).values(newProduct);
     return newProduct;
   } catch (error) {
     console.error(error);

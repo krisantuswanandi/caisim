@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     databaseUrl: "",
     databaseAuthToken: "",
+    sessionPassword: "",
+    appPassword: "",
   },
   css: ["@unocss/reset/tailwind.css"],
   experimental: {
