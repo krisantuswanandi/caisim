@@ -7,10 +7,17 @@ export default defineAuthenticatedEventHandler(async (event) => {
   const body = await readBody(event);
   const id = nanoid();
 
-  if (!body.hash) {
+  if (!body.name || !body.price || !body.store) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Invalid URL",
+      statusMessage: "Fill out all fields",
+    });
+  }
+
+  if (isNaN(body.price)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Price must be a number",
     });
   }
 
@@ -19,7 +26,7 @@ export default defineAuthenticatedEventHandler(async (event) => {
     name: body.name,
     price: body.price,
     store: body.store,
-    image: body.hash,
+    image: "",
   };
 
   try {
