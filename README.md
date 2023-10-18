@@ -1,28 +1,38 @@
+<img src="./public/logo.png" alt="Caisim" width="50" />
+
 # Caisim
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Personal site for groceries
+
+## Stack
+
+- [Nuxt](https://nuxt.com/)
+- [Drizzle](https://orm.drizzle.team/)
+- [Turso](https://turso.tech/)
+- [Bun](https://bun.sh/)
+- [Vercel](https://vercel.com/)
 
 ## Setup
 
-Make sure to install the dependencies:
+- Setup a new database on Turso.
+- Create a `.env` file based on `.env.example`.
+- Fill the database url and token in `.env` based on newly added database.
+- Fill the session and app password with any string.
+- Run `bun install` to install the dependencies.
+- Run `bun run db:push` to create tables based on the schema provided.
+
+## Development
+
+Start the development server on http://localhost:3000:
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
+bun run dev
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+You can use Drizzle studio to see the database content:
 
 ```bash
-npm run dev
+bun run db:studio
 ```
 
 ## Production
@@ -30,13 +40,13 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
