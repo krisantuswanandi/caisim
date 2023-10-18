@@ -12,4 +12,9 @@ export default defineNuxtConfig({
   experimental: {
     typedPages: true,
   },
+  app: {
+    head: {
+      link: [{ rel: "icon", href: "/logo.png" }],
+    },
+  },
 });
