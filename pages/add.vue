@@ -40,17 +40,21 @@ async function addProduct() {
 </script>
 
 <template>
-  <div class="flex items-baseline">
-    <h1 class="text-2xl font-bold my-6 mr-auto">Add New Item</h1>
-    <NuxtLink to="/" class="text-blue-700 underline underline-offset-2">
-      Back
-    </NuxtLink>
-  </div>
-  <form @submit.prevent="addProduct">
-    <BaseInput type="text" name="Name" v-model="form.name" />
-    <BaseInput type="text" name="Price" v-model="form.price" />
-    <BaseInput type="text" name="Store" v-model="form.store" />
-    <div class="h-6 mb-4 text-red-600">{{ errMsg }}</div>
-    <BaseButton>Submit</BaseButton>
-  </form>
+  <BaseLayout title="Add New Item">
+    <template #actions>
+      <NuxtLink
+        to="/"
+        class="rounded-md hover:bg-neutral-100 border border-neutral-300 px-4 py-1"
+      >
+        Back
+      </NuxtLink>
+    </template>
+    <form @submit.prevent="addProduct">
+      <BaseInput type="text" name="name" label="Name" v-model="form.name" />
+      <BaseInput type="text" name="price" label="Price" v-model="form.price" />
+      <BaseInput type="text" name="store" label="Store" v-model="form.store" />
+      <div class="py-4 text-red-600">{{ errMsg }}</div>
+      <BaseButton>Submit</BaseButton>
+    </form>
+  </BaseLayout>
 </template>

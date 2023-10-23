@@ -2,12 +2,19 @@
 import { Product } from "@/database/schema";
 
 defineProps<{
-  data: Product[];
+  products: Product[];
 }>();
 </script>
 
 <template>
-  <div class="mt-3 pb-24">
-    <ProductItem v-for="item in data" :key="item.name" :data="item" />
+  <div v-if="products.length" class="pt-3 pb-10">
+    <ProductItem
+      v-for="product in products"
+      :key="product.name"
+      :data="product"
+    />
+  </div>
+  <div v-else class="py-10 text-neutral-400 italic text-center">
+    No products
   </div>
 </template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { data, error } = await useFetch("/api/products");
+import { Product } from "@/database/schema";
+
+const { data, error } = await useFetch<Product[]>("/api/products");
 
 if (error.value?.statusCode === 401) {
   navigateTo("/login");
@@ -7,10 +9,6 @@ if (error.value?.statusCode === 401) {
 
 const router = useRouter();
 const search = ref("");
-
-const searchProduct = (keyword: string) => {
-  search.value = keyword;
-};
 
 const products = computed(() => {
   if (!data.value) return [];
@@ -29,15 +27,22 @@ async function logout() {
 </script>
 
 <template>
-  <SearchProduct @search="searchProduct" />
-  <ProductList :data="products" />
-  <div class="fixed left-0 right-0 bottom-0 max-w-lg p-2 mx-auto">
-    <button @click="logout">Logout</button>
-    <NuxtLink
-      to="/add"
-      class="bg-gray-400 hover:bg-gray-500 py-3 px-4 block rounded-lg text-center"
-    >
-      New Item
-    </NuxtLink>
-  </div>
+  <BaseLayout title="Caisim">
+    <template #actions>
+      <NuxtLink
+        to="/add"
+        class="rounded-md hover:bg-neutral-100 border border-neutral-300 px-4 py-1"
+      >
+        Add Item
+      </NuxtLink>
+      <button
+        @click="logout"
+        class="rounded-md hover:bg-neutral-100 border border-neutral-300 px-4 py-1"
+      >
+        Logout
+      </button>
+    </template>
+    <BaseInput name="search" placeholder="search here..." v-model="search" />
+    <ProductList :products="products" />
+  </BaseLayout>
 </template>

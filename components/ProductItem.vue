@@ -1,14 +1,20 @@
 <script setup lang="ts">
-const props = defineProps(['data'])
+import { Product } from "@/database/schema";
+
+const props = defineProps<{ data: Product }>();
+
+const price = computed(() => formatCurrency(props.data.price));
 </script>
 
 <template>
-  <div class="rounded-lg first:mt-0 mt-1 bg-gray-300 p-4 flex">
-    <div>
+  <div
+    class="px-2 py-2 flex border-b border-neutral-300 hover:bg-neutral-100 last:border-none"
+  >
+    <div class="capitalize">
       {{ props.data.name }}
     </div>
     <div class="ml-auto">
-      {{ props.data.price }}
+      {{ price }}
     </div>
   </div>
 </template>

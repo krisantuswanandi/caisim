@@ -25,21 +25,17 @@ async function login() {
 <template>
   <div class="h-screen flex justify-center items-center">
     <div>
-      <div class="flex items-center">
-        <form @submit.prevent="login">
-          <input
-            v-model="password"
-            type="password"
-            class="border border-black rounded-md w-48 h-8 px-2 text-sm"
-            :class="errorMsg ? 'border-red-600' : ''"
-          />
-          <button
-            class="bg-neutral-900 rounded-md w-16 h-8 ml-1 text-white text-xs"
-          >
-            Login
-          </button>
-        </form>
-      </div>
+      <form @submit.prevent="login" class="flex items-center gap-1">
+        <BaseInput
+          v-model="password"
+          name="password"
+          type="password"
+          :class="errorMsg ? 'border-red-600' : ''"
+        />
+        <div>
+          <BaseButton>Login</BaseButton>
+        </div>
+      </form>
       <div class="text-xs text-red-600 mt-1 h-4">
         {{ errorMsg }}
       </div>
