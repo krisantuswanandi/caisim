@@ -3,14 +3,19 @@ const router = useRouter();
 
 const password = ref("");
 const errorMsg = ref("");
+const loading = ref(false);
 
 async function login() {
+  if (!password.value || loading.value) return;
+
+  loading.value = true;
   const { error } = await useFetch("/api/login", {
     method: "POST",
     body: { password: password.value },
   });
 
   if (error.value) {
+    loading.value = false;
     errorMsg.value = error.value?.statusMessage || "";
     setTimeout(() => {
       errorMsg.value = "";
@@ -31,9 +36,10 @@ async function login() {
           name="password"
           type="password"
           :class="errorMsg ? 'border-red-600' : ''"
+          :disabled="loading"
         />
         <div>
-          <BaseButton>Login</BaseButton>
+          <BaseButton :disabled="loading">Login</BaseButton>
         </div>
       </form>
       <div class="text-xs text-red-600 mt-1 h-4">
