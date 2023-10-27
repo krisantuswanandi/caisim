@@ -14,11 +14,9 @@ async function login() {
     body: { password: password.value },
   });
 
-  console.log("error", JSON.stringify(error.value));
-
   if (error.value) {
     loading.value = false;
-    errorMsg.value = error.value?.statusMessage || "Failed to login";
+    errorMsg.value = error.value?.data.statusMessage || "Failed to login";
     setTimeout(() => {
       errorMsg.value = "";
     }, 1500);
